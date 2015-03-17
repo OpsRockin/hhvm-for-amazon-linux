@@ -49,7 +49,7 @@ rm -rf $RPM_BUILD_ROOT
 export QA_RPATHS=$[ 0x0001|0x0010 ]
 
 ls > filelist
-mkdir -p $RPM_BUILD_ROOT/%{_libdir}/hiphop-php
+mkdir -p $RPM_BUILD_ROOT%{_libdir}/hiphop-php
 mv `cat filelist` $RPM_BUILD_ROOT/%{_libdir}/hiphop-php/
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/hhvm
@@ -77,9 +77,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
+%{_libdir}/hiphop-php/*
 
 
 %doc
 
 
 %changelog
+* Tue Mar 18 2015 sawanoboly 3.6.0
+* Mar 2015 Forked
+ - Release 3.6.0
+ - Ref: sexydev
+ - Ref: hop5

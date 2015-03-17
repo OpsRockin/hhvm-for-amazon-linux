@@ -9,3 +9,4 @@ default[:hhvm_rpm][:build] = {
   ]
 }
 default[:hhvm_rpm][:build][:ref] = "HHVM-#{node[:hhvm_rpm][:build][:version]}"
+default[:hhvm_rpm][:build][:action] = :nothing  # For debug

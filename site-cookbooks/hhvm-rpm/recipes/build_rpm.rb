@@ -27,5 +27,6 @@ execute "rpmbuild -bb --clean SPECS/hhvm.spec" do
   user node[:hhvm_rpm][:user]
   group node[:hhvm_rpm][:group]
   cwd File.join('/home', node[:hhvm_rpm][:user], 'rpmbuild')
+  action node[:hhvm_rpm][:build][:action]
 end
 
