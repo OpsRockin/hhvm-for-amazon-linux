@@ -129,6 +129,8 @@ GEM
     kitchen-ec2 (0.8.0)
       fog
       test-kitchen (~> 1.0)
+    knife-zero (1.1.6)
+      chef
     librarian (0.1.2)
       highline
       thor (~> 0.15)
@@ -225,5 +227,6 @@ PLATFORMS
 
 DEPENDENCIES
   kitchen-ec2
+  knife-zero
   librarian-chef
   test-kitchen

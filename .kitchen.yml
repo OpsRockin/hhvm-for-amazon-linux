@@ -16,8 +16,8 @@ platforms:
   - name: amazon-2014.09.2
     driver:
       image_id: ami-18869819 # Tokyo
-      flavor_id: c3.large
-      username: ec2-user
+      flavor_id: c3.2xlarge
+      username: <%= ENV['AWS_EC2_USER'] || 'ec2-user' %>
     provisioner:
       chef_omnibus_install_options: " && sudo yum -y update"
 
@@ -26,4 +26,6 @@ suites:
     run_list:
       - build-essential
       - hhvm-rpm::prepare
+      - hhvm-rpm::libdepends
+      - hhvm-rpm::build_rpm
     attributes:

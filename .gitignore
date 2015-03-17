@@ -45,3 +45,5 @@ build/
 .envrc
 /.direnv/
 /.librarian/
+/nodes/
+/clients/

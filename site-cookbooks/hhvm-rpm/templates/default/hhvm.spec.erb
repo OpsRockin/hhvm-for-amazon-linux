@@ -1,0 +1,85 @@
+Name:     hhvm
+Version:  <%= @version %>
+Release:  <%= @release %>%{?dist}
+Summary:  HHVM for Amazon Linux http://hhvm.com
+License:  GPL
+Group: Development/Compilers
+Provides: hiphop-php
+Packager: SAWANOBORI Yukihiko(OpsRock) <sawanoboly @ github>
+URL:      https://github.com/facebook/hhvm
+Source0:  hhvm-<%= @version %>.tar.gz
+BuildArch: x86_64
+Requires: boost >= 1.50.0
+Requires: curl >= 7.29.0
+Requires: expat >= 2.0.1
+Requires: gcc >= 4.6.0 ,gcc-c++,make
+Requires: gd >= 2.0.35
+Requires: glog >= 0.3.2
+Requires: libcap
+Requires: libdwarf >= 20130207
+Requires: libevent >= 1.4.14
+Requires: libicu >= 4.2
+Requires: libmcrypt >= 2.5.8-9
+Requires: libmemcached >= 1.0.8
+Requires: mysql
+Requires: oniguruma >= 5.9
+Requires: openssl
+Requires: pcre
+Requires: tbb >= 4
+Requires: unixODBC >= 2.2.14-12
+Requires: zlib
+
+
+%description
+HHVM (aka the HipHop Virtual Machine) is an open-source virtual machine designed for executing programs written in Hack and PHP. HHVM uses a just-in-time compilation approach to achieve superior performance while maintaining the flexibility that PHP developers are accustomed to. To date, HHVM (and its predecessor HPHPc before it) has realized over a 9x increase in web request throughput and over a 5x reduction in memory consumption for Facebook compared with the PHP 5.2 engine + APC.
+
+%prep
+%setup -qn %{name}-%{version}
+
+
+%build
+export USE_HHVM=1
+export HPHP_HOME=`pwd`
+export HPHP_LIB=`pwd`/bin
+/usr/local/bin/cmake <%= node[:hhvm_rpm][:build][:cmake_opts].join(" ") %> .
+make -j <%= node.cpu.length %>
+
+%install
+rm -rf $RPM_BUILD_ROOT
+export QA_RPATHS=$[ 0x0001|0x0010 ]
+
+ls > filelist
+mkdir -p $RPM_BUILD_ROOT/%{_libdir}/hiphop-php
+mv `cat filelist` $RPM_BUILD_ROOT/%{_libdir}/hiphop-php/
+mkdir -p $RPM_BUILD_ROOT/%{_bindir}
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/hhvm
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/init.d
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
+mkdir -p $RPM_BUILD_ROOT/%{_datadir}/share/hhvm/hdf/
+mkdir -p $RPM_BUILD_ROOT/var/log/hhvm/
+mkdir -p $RPM_BUILD_ROOT/usr/share/hhvm/hdf/
+
+%post
+if [ "$1" = "1" ]; then
+  # Perform whatever first installation
+  :
+elif [ "$1" = "2" ]; then
+  # Perform whatever maintenance must occur before the upgrade begins
+  :
+fi
+
+%postun
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+
+%files
+%defattr(-,root,root,-)
+
+
+%doc
+
+
+%changelog

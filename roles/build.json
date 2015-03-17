@@ -1,0 +1,9 @@
+{
+  "name": "build",
+  "run_list": [
+    "recipe[build-essential]",
+    "recipe[hhvm-rpm::prepare]",
+    "recipe[hhvm-rpm::libdepends]",
+    "recipe[hhvm-rpm::build_rpm]"
+  ]
+}
