@@ -1,0 +1,29 @@
+---
+driver:
+  name: ec2
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] %>
+  ssh_key: <%= File.expand_path("~/.ssh/#{ENV['AWS_SSH_KEY_ID']}") %>
+  region: ap-northeast-1
+  availability_zone: ap-northeast-1a
+
+provisioner:
+  name: chef_zero
+  cookbok_path: ["./cookbooks", "./site-cookbooks"]
+
+platforms:
+  - name: amazon-2014.09.2
+    driver:
+      image_id: ami-18869819 # Tokyo
+      flavor_id: c3.large
+      username: ec2-user
+    provisioner:
+      chef_omnibus_install_options: " && sudo yum -y update"
+
+suites:
+  - name: default
+    run_list:
+      - build-essential
+      - hhvm-rpm::prepare
+    attributes:
