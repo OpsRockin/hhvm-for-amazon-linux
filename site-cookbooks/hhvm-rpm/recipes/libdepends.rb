@@ -25,6 +25,7 @@ yum_package "libdwarf-devel"
 
 ark 'cmake' do
   url 'http://www.cmake.org/files/v3.2/cmake-3.2.1-Linux-x86_64.tar.gz'
+  checksum '81ba51d72946e40fa7e38a9244a5966dc42a8bfae03087a211e28e5243901ea6'
   has_binaries %w[
 bin/ccmake
 bin/cmake
