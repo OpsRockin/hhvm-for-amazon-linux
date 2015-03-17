@@ -5,8 +5,11 @@ driver:
   aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] %>
   ssh_key: <%= File.expand_path("~/.ssh/#{ENV['AWS_SSH_KEY_ID']}") %>
-  region: ap-northeast-1
-  availability_zone: ap-northeast-1a
+  region: <%= ENV['AWS_REGION'] || 'ap-northeast-1' %>
+  availability_zone: <%= ENV['AWS_AZ'] || 'ap-northeast-1c' %>
+  subnet_id: <%= ENV['AWS_SUBNET_ID'] %>
+  security_group_ids: <%= ENV['AWS_SG_IDS'].split(",") %>
+  associate_public_ip: true
 
 provisioner:
   name: chef_zero
@@ -15,8 +18,8 @@ provisioner:
 platforms:
   - name: amazon-2014.09.2
     driver:
-      image_id: ami-18869819 # Tokyo
-      flavor_id: c3.2xlarge
+      image_id: <%= ENV['AWS_EC2_AMI_ID'] || 'ami-18869819' %> # Tokyo
+      flavor_id: c4.2xlarge
       username: <%= ENV['AWS_EC2_USER'] || 'ec2-user' %>
     provisioner:
       chef_omnibus_install_options: " && sudo yum -y update"
