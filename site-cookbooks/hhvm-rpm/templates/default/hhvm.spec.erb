@@ -8,6 +8,10 @@ Provides: hiphop-php
 Packager: SAWANOBORI Yukihiko(OpsRock) <sawanoboly @ github>
 URL:      https://github.com/facebook/hhvm
 Source0:  hhvm-<%= @version %>.tar.gz
+Source1: hhvm-init
+Source2: hhvm-sysconfig
+Source3: hhvm-server.ini
+Source4: hhvm-static.mime-types.hdf
 BuildArch: x86_64
 Requires: boost >= 1.50.0
 Requires: curl >= 7.29.0
@@ -60,6 +64,26 @@ mkdir -p $RPM_BUILD_ROOT/%{_datadir}/share/hhvm/hdf/
 mkdir -p $RPM_BUILD_ROOT/var/log/hhvm/
 mkdir -p $RPM_BUILD_ROOT/usr/share/hhvm/hdf/
 
+# Copy the init script
+%{__install} -m 755 -p %{SOURCE1} \
+	$RPM_BUILD_ROOT/%{_sysconfdir}/init.d/hhvm
+# Copy the sysconfig hhvm
+%{__install} -m 644 -p %{SOURCE2} \
+	$RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig/hhvm
+# Copy the server.ini
+%{__install} -m 644 -p %{SOURCE3} \
+	$RPM_BUILD_ROOT/%{_sysconfdir}/hhvm/server.ini
+# Copy the static.mime-types.hdf
+%{__install} -m 644 -p %{SOURCE4} \
+	$RPM_BUILD_ROOT/usr/share/hhvm/hdf/static.mime-types.hdf
+# Copy the actual binary
+%{__install} -m 755 -p $RPM_BUILD_ROOT/%{_libdir}/hiphop-php/hphp/hhvm/hhvm \
+	$RPM_BUILD_ROOT/%{_bindir}/hhvm
+echo "export USE_HHVM=1" > $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
+echo "export HPHP_HOME=%{_libdir}/hiphop-php" >> $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
+echo "export HPHP_LIB=%{_libdir}/hiphop-php/bin" >> /$RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
+echo "export HHVM_LIB_PATH=%{_libdir}/hiphop-php/bin" >> $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
+
 %post
 if [ "$1" = "1" ]; then
   # Perform whatever first installation
@@ -78,6 +102,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_libdir}/hiphop-php/*
+/etc/init.d/hhvm
+/etc/hhvm/server.ini
+/etc/profile.d/hphp.sh
+/etc/sysconfig/hhvm
+/usr/bin/hhvm
+/usr/share/hhvm/hdf/static.mime-types.hdf
+/var/log/hhvm/
 
 
 %doc
