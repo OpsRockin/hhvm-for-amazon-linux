@@ -66,19 +66,19 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/hhvm/hdf/
 
 # Copy the init script
 %{__install} -m 755 -p %{SOURCE1} \
-	$RPM_BUILD_ROOT/%{_sysconfdir}/init.d/hhvm
+    $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/hhvm
 # Copy the sysconfig hhvm
 %{__install} -m 644 -p %{SOURCE2} \
-	$RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig/hhvm
+    $RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig/hhvm
 # Copy the server.ini
 %{__install} -m 644 -p %{SOURCE3} \
-	$RPM_BUILD_ROOT/%{_sysconfdir}/hhvm/server.ini
+    $RPM_BUILD_ROOT/%{_sysconfdir}/hhvm/server.ini
 # Copy the static.mime-types.hdf
 %{__install} -m 644 -p %{SOURCE4} \
-	$RPM_BUILD_ROOT/usr/share/hhvm/hdf/static.mime-types.hdf
+    $RPM_BUILD_ROOT/usr/share/hhvm/hdf/static.mime-types.hdf
 # Copy the actual binary
 %{__install} -m 755 -p $RPM_BUILD_ROOT/%{_libdir}/hiphop-php/hphp/hhvm/hhvm \
-	$RPM_BUILD_ROOT/%{_bindir}/hhvm
+    $RPM_BUILD_ROOT/%{_bindir}/hhvm
 echo "export USE_HHVM=1" > $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
 echo "export HPHP_HOME=%{_libdir}/hiphop-php" >> $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
 echo "export HPHP_LIB=%{_libdir}/hiphop-php/bin" >> /$RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}
 %post
 if [ "$1" = "1" ]; then
   # Perform whatever first installation
-  :
+  echo "Please install mysql or its alternatives before you start hhvm."
 elif [ "$1" = "2" ]; then
   # Perform whatever maintenance must occur before the upgrade begins
   :
@@ -115,8 +115,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Tue Mar 18 2015 sawanoboly 3.6.0
+* Tue Mar 18 2015 sawanoboly 3.6.0-1
 * Mar 2015 Forked
- - Release 3.6.0
+ - Release 3.6.0-1
  - Ref: sexydev
  - Ref: hop5
