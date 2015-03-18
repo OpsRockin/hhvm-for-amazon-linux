@@ -13,7 +13,7 @@ driver:
 
 provisioner:
   name: chef_zero
-  cookbok_path: ["./cookbooks", "./site-cookbooks"]
+  cookbok_path: ["./cookbooks", "./site-cookbooks", "./test/cookboks"]
 
 platforms:
   - name: amazon-2014.09.2
@@ -31,4 +31,11 @@ suites:
       - hhvm-rpm::prepare
       - hhvm-rpm::libdepends
       - hhvm-rpm::build_rpm
+    attributes:
+      hhvm_rpm:
+        build:
+          action: run
+  - name: packaged
+    run_list:
+      - test_rpm
     attributes:

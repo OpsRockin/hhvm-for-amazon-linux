@@ -7,11 +7,5 @@ cookbook 'ark'
 cookbook 'yum'
 cookbook 'build-essential'
 
-# cookbook 'apache2', '>= 1.0.0'
-
-# cookbook 'rvm',
-#   :git => 'https://github.com/fnichol/chef-rvm'
-
-# cookbook 'postgresql',
-#   :git => 'https://github.com/findsyou/cookbooks',
-#   :ref => 'postgresql-improvements'
+## Test
+cookbook 'test_rpm', path: File.expand_path("../test/cookbooks/test_rpm", __FILE__)
