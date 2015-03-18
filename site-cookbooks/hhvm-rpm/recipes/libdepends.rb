@@ -9,19 +9,16 @@ yum_repository 'hop5' do
   gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-HOP5'
   action :create
   priority '9'
-  includepkgs hoppkgs
+  includepkgs hoppkgs.join(",")
 end
 
 ## install from hop5
-hoppkgs.split(',').map do |pkg|
+hoppkgs.map do |pkg|
   yum_package pkg do
     action :install
     options '-y --nogpgcheck'
   end
 end
-
-yum_package "libdwarf"
-yum_package "libdwarf-devel"
 
 ark 'cmake' do
   url 'http://www.cmake.org/files/v3.2/cmake-3.2.1-Linux-x86_64.tar.gz'

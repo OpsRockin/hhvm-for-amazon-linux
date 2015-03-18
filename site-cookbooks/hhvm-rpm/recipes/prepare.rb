@@ -1,43 +1,7 @@
 # Ref https://github.com/facebook/hhvm/wiki/Building%20and%20installing%20HHVM%20on%20Amazon%20Linux%202014.03
 
-%w[
-git
-rpm-build
-rpmdevtools
-mysql-server
-ImageMagick-devel
-automake
-binutils-devel
-boost-devel
-bzip2-devel
-chrpath
-cmake
-cpp
-elfutils-libelf-devel
-expat-devel
-gd-devel
-jemalloc-devel
-libIDL-devel
-libc-client-devel
-libcap-devel
-libcurl-devel
-libevent-devel
-libicu-devel
-libmcrypt-devel
-libmemcached-devel
-libtool
-libxml2-devel
-libxslt-devel
-memcached
-mysql-devel
-oniguruma-devel
-openldap-devel
-pam-devel
-pcre-devel
-readline-devel
-subversion
-unixODBC-devel
-].map do|pkg|
+
+node[:hhvm_rpm][:packages][:build_deps_from_amzn].map do |pkg|
   package pkg
 end
 

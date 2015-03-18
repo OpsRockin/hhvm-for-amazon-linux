@@ -1,14 +1,66 @@
 default[:hhvm_rpm][:packages] = {
-  build_deps_from_amzn: %w[
-  ],
-  build_deps_from_hop5: %w[
-glog-devel
-tbb-devel
-  ],
-  run_deps_from_amazon: %w[
-  ],
-  run_deps_from_hop5: %w[
-glog
-tbb
-  ]
+build_deps_from_amzn: %w[
+  git
+  rpm-build
+  rpmdevtools
+  mysql-server
+  ImageMagick-devel
+  automake
+  binutils-devel
+  boost-devel
+  bzip2-devel
+  chrpath
+  cmake
+  cpp
+  elfutils-libelf-devel
+  expat-devel
+  gd-devel
+  jemalloc-devel
+  libIDL-devel
+  libc-client-devel
+  libcap-devel
+  libcurl-devel
+  libevent-devel
+  libicu-devel
+  libmcrypt-devel
+  libmemcached-devel
+  libtool
+  libxml2-devel
+  libxslt-devel
+  memcached
+  mysql-devel
+  oniguruma-devel
+  openldap-devel
+  pam-devel
+  pcre-devel
+  readline-devel
+  subversion
+  unixODBC-devel
+  libdwarf-devel
+],
+build_deps_from_hop5: %w[
+  glog-devel
+  tbb-devel
+],
+run_deps_from_amazon: %w[
+  boost
+  curl
+  expat
+  gcc
+  gd
+  libcap
+  libevent
+  libicu
+  libmcrypt
+  libmemcached
+  oniguruma
+  openssl
+  pcre
+  unixODBC
+  libdwarf
+],
+run_deps_from_hop5: %w[
+  glog
+  tbb
+]
 }
