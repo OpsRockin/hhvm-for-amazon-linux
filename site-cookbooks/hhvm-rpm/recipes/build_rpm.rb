@@ -27,6 +27,7 @@ execute "rpmbuild -bb --clean SPECS/hhvm.spec" do
   user node[:hhvm_rpm][:user]
   group node[:hhvm_rpm][:group]
   cwd File.join('/home', node[:hhvm_rpm][:user], 'rpmbuild')
-  action node[:hhvm_rpm][:build][:action]
+  action node[:hhvm_rpm][:build][:action].to_sym
+  creates File.join('/home', node[:hhvm_rpm][:user], 'rpmbuild/RPMS/x86_64', "hhvm-#{node[:hhvm_rpm][:build][:version]}-#{node[:hhvm_rpm][:build][:release]}.amzn1.x86_64.rpm")
 end
 

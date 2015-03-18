@@ -1,7 +1,7 @@
 # Ref: https://github.com/facebook/hhvm/wiki/Building%20and%20installing%20HHVM%20on%20Amazon%20Linux%202014.03
 # http://www.hop5.in/yum/el6/repoview/
 
-hoppkgs = "glog,glog-devel,tbb,tbb-devel"
+hoppkgs = node[:hhvm_rpm][:packages][:build_deps_from_hop5].concat(node[:hhvm_rpm][:packages][:run_deps_from_hop5])
 
 yum_repository 'hop5' do
   description "www.hop5.in Centos Repository"
