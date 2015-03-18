@@ -36,6 +36,7 @@ pam-devel
 pcre-devel
 readline-devel
 subversion
+unixODBC-devel
 ].map do|pkg|
   package pkg
 end

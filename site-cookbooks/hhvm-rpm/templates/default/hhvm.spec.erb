@@ -25,7 +25,7 @@ Requires: libevent >= 1.4.14
 Requires: libicu >= 4.2
 Requires: libmcrypt >= 2.5.8-9
 Requires: libmemcached >= 1.0.8
-Requires: mysql
+# Requires: mysql  ## for optional choice MariaDB or Percona
 Requires: oniguruma >= 5.9
 Requires: openssl
 Requires: pcre
@@ -83,6 +83,7 @@ echo "export USE_HHVM=1" > $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
 echo "export HPHP_HOME=%{_libdir}/hiphop-php" >> $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
 echo "export HPHP_LIB=%{_libdir}/hiphop-php/bin" >> /$RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
 echo "export HHVM_LIB_PATH=%{_libdir}/hiphop-php/bin" >> $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
+rm -rf $RPM_BUILD_ROOT/%{_libdir}
 
 %post
 if [ "$1" = "1" ]; then
@@ -101,7 +102,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_libdir}/hiphop-php/*
 /etc/init.d/hhvm
 /etc/hhvm/server.ini
 /etc/profile.d/hphp.sh
