@@ -3,11 +3,15 @@
 Stable: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-stable)
 Test: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-test)
 
-## Requrements
+## Runtime Requrements
 
 - hop5 Package Repository [http://www.hop5.in](http://www.hop5.in)
     - Google glog
     - Intel tbb (> 2.4)
+- mysql or its alternatives such as below.
+    - mysql-server
+    - mariadb-server
+    - percona-server
 
 ## How to install from packagecloud
 
