@@ -1,12 +1,23 @@
 # hhvm-for-amazon-linux RPM
 
-Stable: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-stable)
-Test: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-test)
-
 Building rpm-package of [hiphop-php(hhvm)](http://hhvm.com) from source for Amazon Linux .
 
+## Packages
 
-## Runtime Requrements
+RPMs are provided via package_cloud.
+
+- Stable: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-stable)
+- Test: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-test)
+
+## Current Status of this branch
+
+- HHVM 3.6.0
+
+special options
+
+- `-DENABLE_ZEND_COMPAT=ON`
+
+### Runtime Requrements
 
 - hop5 Package Repository [http://www.hop5.in](http://www.hop5.in)
     - Google glog
@@ -17,6 +28,43 @@ Building rpm-package of [hiphop-php(hhvm)](http://hhvm.com) from source for Amaz
     - percona-server
 
 ## How to install from packagecloud
+
+### Shell example
+
+```
+## Add pop5
+cat <<'EOL'  > /etc/yum.repos.d/hop5.repo 
+[hop5]
+name=www.hop5.in Centos Repository
+baseurl=http://www.hop5.in/yum/el6/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-HOP5
+includepkgs=glog,tbb
+priority=9
+sslverify=true
+EOL
+
+## Add OpsRock
+cat <<'EOL' > /etc/yum.repos.d/opsrock-hhvm.repo 
+[opsrock-hhvm]
+name=Opsrock hhvm for Amazon Linux Repository
+baseurl=https://packagecloud.io/opsrock-hhvm/hhvm-test/el/6/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://packagecloud.io/gpg.key
+includepkgs=hhvm
+sslverify=true
+EOL
+
+yum update -y
+yum install -y glog tbb mysql-server
+
+yum install -y hhvm
+
+chkconfig hhvm on
+service start hhvm
+```
 
 ### Chef Recipe example
 
