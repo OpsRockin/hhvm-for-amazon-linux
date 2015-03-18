@@ -3,6 +3,9 @@
 Stable: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-stable)
 Test: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-test)
 
+Building rpm-package of [hiphop-php(hhvm)](http://hhvm.com) from source for Amazon Linux .
+
+
 ## Runtime Requrements
 
 - hop5 Package Repository [http://www.hop5.in](http://www.hop5.in)
@@ -57,6 +60,16 @@ service 'hhvm' do
   action [:enable, :start]
 end
 ```
+
+## Development
+
+Please set requirements to ENV. (see `.kitchen.yml`)
+
+```
+$ bundle install
+$ bundle exec kitchen converge default
+```
+
 
 ## Contributing
 
