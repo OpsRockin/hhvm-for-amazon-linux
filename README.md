@@ -70,6 +70,14 @@ $ bundle install
 $ bundle exec kitchen converge default
 ```
 
+It takes about...
+
+```
+real	22m32.427s
+user	0m4.240s
+sys	0m0.564s
+```
+
 
 ## Contributing
 
