@@ -12,3 +12,7 @@ end
 describe port(9001) do
   it { should be_listening }
 end
+
+describe command('hhvm --php -r "phpinfo();"') do
+  its(:stdout) { should eq "HipHop\n" }
+end
