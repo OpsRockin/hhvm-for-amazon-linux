@@ -61,7 +61,7 @@ EOL
 yum update -y
 yum install -y glog tbb mysql-server
 
-yum install -y hhvm
+yum install -y hhvm --nogpg
 
 chkconfig hhvm on
 service start hhvm
