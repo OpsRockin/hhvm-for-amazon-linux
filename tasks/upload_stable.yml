@@ -3,5 +3,5 @@ messenger:
   type: fake
 pipeline:
   - stage:
-    name: Upload Package to Test
+    name: Upload Package to Stable
     command: kitchen exec default -c "PACKAGECLOUD_TOKEN=$PACKAGECLOUD_TOKEN /opt/chef/embedded/bin/package_cloud push opsrock-hhvm/hhvm-stable/el/6 rpmbuild/RPMS/x86_64/hhvm-*.amzn1.x86_64.rpm"
