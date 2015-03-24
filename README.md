@@ -11,11 +11,12 @@ RPMs are provided via package_cloud.
 
 ## Current Status of this branch
 
-- HHVM 3.6.0
+- HHVM 3.6.1
 
 special options
 
 - `-DENABLE_ZEND_COMPAT=ON`
+- `-DMYSQL_UNIX_SOCK_ADDR=/var/lib/mysql/mysql.sock`
 
 ### Runtime Requrements
 

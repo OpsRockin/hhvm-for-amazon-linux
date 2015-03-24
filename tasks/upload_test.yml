@@ -1,0 +1,10 @@
+---
+messenger:
+  type: fake
+pipeline:
+  - stage:
+    name: Install Pacage Cloud Gem
+    command: kitchen exec default -c 'sudo -E /opt/chef/embedded/bin/gem install package_cloud --no-ri --no-rdoc'
+  - stage:
+    name: Upload Package to Test
+    command: kitchen exec default -c "PACKAGECLOUD_TOKEN=$PACKAGECLOUD_TOKEN /opt/chef/embedded/bin/package_cloud push opsrock-hhvm/hhvm-test/el/6 rpmbuild/RPMS/x86_64/hhvm-*.amzn1.x86_64.rpm"
