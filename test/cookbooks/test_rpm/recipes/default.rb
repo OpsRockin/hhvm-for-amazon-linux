@@ -15,12 +15,13 @@ yum_repository 'opsrock-hhvm' do
   gpgkey 'https://packagecloud.io/gpg.key'
   action :create
   includepkgs 'hhvm'
+  gpgcheck false
 end
 
 yum_package 'mysql-server'
 yum_package 'hhvm' do
   action :install
-  options '-y --nogpgcheck'
+  # options '-y --nogpgcheck'
 end
 
 service 'hhvm' do
