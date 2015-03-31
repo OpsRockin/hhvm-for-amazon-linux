@@ -9,8 +9,8 @@ describe service('hhvm') do
   it { should be_running }
 end
 
-describe port(9001) do
-  it { should be_listening }
+describe file('/var/tmp/hiphop-php.sock') do
+  it { should be_socket }
 end
 
 describe command('hhvm --php -r "phpinfo();"') do
@@ -22,5 +22,5 @@ describe command('hhvm --version') do
 end
 
 describe command('rpm -q --changelog hhvm') do
-  its(:stdout) { should match /sawanoboly\s3\.6\.1-1\n/ }
+  its(:stdout) { should match /sawanoboly\s3\.6\.1-2\n/ }
 end
