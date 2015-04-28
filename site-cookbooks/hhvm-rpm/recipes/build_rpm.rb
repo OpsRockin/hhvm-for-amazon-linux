@@ -23,6 +23,7 @@ template File.join('/home', node[:hhvm_rpm][:user], 'rpmbuild/SPECS', "hhvm.spec
 end
 
 execute "rpmbuild -bb --clean SPECS/hhvm.spec" do
+  timeout 7200
   environment "HOME" => File.join('/home', node[:hhvm_rpm][:user])
   user node[:hhvm_rpm][:user]
   group node[:hhvm_rpm][:group]
