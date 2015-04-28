@@ -103,11 +103,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 /etc/init.d/hhvm
-/etc/hhvm/server.ini
-/etc/profile.d/hphp.sh
-/etc/sysconfig/hhvm
+%config(noreplace) /etc/hhvm/server.ini
+%config(noreplace) /etc/profile.d/hphp.sh
+%config(noreplace) /etc/sysconfig/hhvm
 /usr/bin/hhvm
-/usr/share/hhvm/hdf/static.mime-types.hdf
+%config /usr/share/hhvm/hdf/static.mime-types.hdf
 /var/log/hhvm/
 
 
