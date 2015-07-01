@@ -18,9 +18,9 @@ describe command('hhvm --php -r "phpinfo();"') do
 end
 
 describe command('hhvm --version') do
-  its(:stdout) { should match /^HipHop VM 3\.6\.4/ }
+  its(:stdout) { should match /^HipHop VM 3\.6\.5/ }
 end
 
 describe command('rpm -q --changelog hhvm') do
-  its(:stdout) { should match /sawanoboly\s3\.6\.4-1\n/ }
+  its(:stdout) { should match /sawanoboly\s3\.6\.5-1\n/ }
 end
