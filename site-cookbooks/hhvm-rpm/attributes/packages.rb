@@ -15,6 +15,9 @@ build_deps_from_amzn: %w[
   elfutils-libelf-devel
   expat-devel
   gd-devel
+  gmp-devel
+  gperf
+  gperftools
   jemalloc-devel
   libIDL-devel
   libc-client-devel
@@ -39,7 +42,6 @@ build_deps_from_amzn: %w[
   libdwarf-devel
 ],
 build_deps_from_epel: %w[
-  ocaml
 ],
 build_deps_from_hop5: %w[
   glog-devel

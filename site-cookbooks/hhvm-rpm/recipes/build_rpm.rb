@@ -22,7 +22,7 @@ template File.join('/home', node[:hhvm_rpm][:user], 'rpmbuild/SPECS', "hhvm.spec
   variables node[:hhvm_rpm][:build]
 end
 
-execute "rpmbuild -bb --clean SPECS/hhvm.spec" do
+execute "eval `opam config env` ; rpmbuild -bb --clean SPECS/hhvm.spec" do
   timeout 7200
   environment "HOME" => File.join('/home', node[:hhvm_rpm][:user])
   user node[:hhvm_rpm][:user]

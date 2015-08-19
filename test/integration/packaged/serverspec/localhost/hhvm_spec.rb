@@ -14,13 +14,13 @@ describe file('/var/tmp/hiphop-php.sock') do
 end
 
 describe command('hhvm --php -r "phpinfo();"') do
-  its(:stdout) { should eq "HipHop\n" }
+  its(:stdout) { should match /<title>HHVM phpinfo<\/title>/ }
 end
 
 describe command('hhvm --version') do
-  its(:stdout) { should match /^HipHop VM 3\.6\.5/ }
+  its(:stdout) { should match /^HipHop VM 3\.9\.0/ }
 end
 
 describe command('rpm -q --changelog hhvm') do
-  its(:stdout) { should match /sawanoboly\s3\.6\.5-1\n/ }
+  its(:stdout) { should match /sawanoboly\s3\.9\.0-1\n/ }
 end

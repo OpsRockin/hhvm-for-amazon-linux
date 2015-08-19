@@ -13,12 +13,26 @@ yum_repository 'hop5' do
   includepkgs hoppkgs.join(",")
 end
 
+yum_repository 'home_ocaml' do
+  description "opam (CentOS_6)"
+  baseurl "http://download.opensuse.org/repositories/home:/ocaml/CentOS_6/"
+  gpgkey "http://download.opensuse.org/repositories/home:/ocaml/CentOS_6/repodata/repomd.xml.key"
+  action :create
+  enabled false
+end
+
 ## install from epel
 epelpkgs.map do |pkg|
   yum_package pkg do
     action :install
     options '--enablerepo=epel'
   end
+end
+
+## install opam
+yum_package "opam" do
+  action :install
+  options '--enablerepo=home_ocaml'
 end
 
 ## install from hop5
@@ -41,3 +55,11 @@ bin/ctest
   ]
 end
 
+bash 'install ocaml' do
+  user node[:hhvm_rpm][:user]
+  group node[:hhvm_rpm][:group]
+  code <<-EOL
+  opam init --comp=#{node[:ocaml][:version]} -y
+  EOL
+  creates File.join('/home', node[:hhvm_rpm][:user], '.opam', node[:ocaml][:version], "bin/ocaml")
+end
