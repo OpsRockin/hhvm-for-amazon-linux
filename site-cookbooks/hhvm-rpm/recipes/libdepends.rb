@@ -2,6 +2,7 @@
 # http://www.hop5.in/yum/el6/repoview/
 
 hoppkgs = node[:hhvm_rpm][:packages][:build_deps_from_hop5].concat(node[:hhvm_rpm][:packages][:run_deps_from_hop5])
+epelpkgs = node[:hhvm_rpm][:packages][:build_deps_from_epel]
 
 yum_repository 'hop5' do
   description "www.hop5.in Centos Repository"
@@ -10,6 +11,14 @@ yum_repository 'hop5' do
   action :create
   priority '9'
   includepkgs hoppkgs.join(",")
+end
+
+## install from epel
+epelpkgs.map do |pkg|
+  yum_package pkg do
+    action :install
+    options '--enablerepo=epel'
+  end
 end
 
 ## install from hop5

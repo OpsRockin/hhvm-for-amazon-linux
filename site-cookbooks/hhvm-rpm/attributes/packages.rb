@@ -38,6 +38,9 @@ build_deps_from_amzn: %w[
   unixODBC-devel
   libdwarf-devel
 ],
+build_deps_from_epel: %w[
+  ocaml
+],
 build_deps_from_hop5: %w[
   glog-devel
   tbb-devel
