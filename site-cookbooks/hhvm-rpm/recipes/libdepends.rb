@@ -56,6 +56,7 @@ bin/ctest
 end
 
 bash 'install ocaml' do
+  environment "HOME" => File.join('/home', node[:hhvm_rpm][:user])
   user node[:hhvm_rpm][:user]
   group node[:hhvm_rpm][:group]
   code <<-EOL
