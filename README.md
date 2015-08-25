@@ -138,5 +138,7 @@ sys	0m0.564s
 
 ## License
 
-Licensed under the GPL
+This package is licensed under the HHVM license(under the BSD) except as otherwise noted.
+
+- https://github.com/facebook/hhvm#license
 
