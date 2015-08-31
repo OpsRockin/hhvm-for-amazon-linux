@@ -1,26 +1,26 @@
 ---
 driver:
   name: ec2
-  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
-  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] %>
-  ssh_key: <%= File.expand_path("~/.ssh/#{ENV['AWS_SSH_KEY_ID']}") %>
   region: <%= ENV['AWS_REGION'] || 'ap-northeast-1' %>
   availability_zone: <%= ENV['AWS_AZ'] || 'ap-northeast-1c' %>
   subnet_id: <%= ENV['AWS_SUBNET_ID'] %>
   security_group_ids: <%= ENV['AWS_SG_IDS'].split(",") %>
   associate_public_ip: true
 
+transport:
+  ssh_key: <%= File.expand_path("~/.ssh/#{ENV['AWS_SSH_KEY_ID']}") %>
+  username: <%= ENV['AWS_EC2_USER'] || 'ec2-user' %>
+
 provisioner:
   name: chef_zero
   cookbok_path: ["./cookbooks", "./site-cookbooks", "./test/cookboks"]
 
 platforms:
-  - name: amazon-2014.09.2
+  - name: amazon-2015.03.1
     driver:
-      image_id: <%= ENV['AWS_EC2_AMI_ID'] || 'ami-18869819' %> # Tokyo
-      flavor_id: c4.2xlarge
-      username: <%= ENV['AWS_EC2_USER'] || 'ec2-user' %>
+      image_id: <%= ENV['AWS_EC2_AMI_ID'] || 'ami-cbf90ecb' %> # Tokyo
+      instance_type: c4.2xlarge
     provisioner:
       chef_omnibus_install_options: " && sudo yum -y update"
 
