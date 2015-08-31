@@ -11,7 +11,7 @@ include_recipe "#{cookbook_name}::setup_hop5"
 
 yum_repository 'opsrock-hhvm' do
   description "Opsrock hhvm for Amazon Linux Repository"
-  baseurl "https://packagecloud.io/opsrock-hhvm/hhvm-test/el/6/$basearch"
+  baseurl "https://packagecloud.io/opsrock-hhvm/hhvm-develop/el/6/$basearch"
   gpgkey 'https://packagecloud.io/gpg.key'
   action :create
   includepkgs 'hhvm'
