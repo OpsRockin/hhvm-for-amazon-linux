@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "#{cookbook_name}::setup_hop5"
+include_recipe "#{cookbook_name}::setup_depends"
 
 yum_repository 'opsrock-hhvm' do
   description "Opsrock hhvm for Amazon Linux Repository"

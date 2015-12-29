@@ -1,16 +1,16 @@
 # Ref: https://github.com/facebook/hhvm/wiki/Building%20and%20installing%20HHVM%20on%20Amazon%20Linux%202014.03
-# http://www.hop5.in/yum/el6/repoview/
 
-hoppkgs = node[:hhvm_rpm][:packages][:build_deps_from_hop5].concat(node[:hhvm_rpm][:packages][:run_deps_from_hop5])
+depend_packages = node[:hhvm_rpm][:packages][:build_deps_from_fedora].concat(node[:hhvm_rpm][:packages][:run_deps_from_fedora])
 epelpkgs = node[:hhvm_rpm][:packages][:build_deps_from_epel]
 
-yum_repository 'hop5' do
-  description "www.hop5.in Centos Repository"
-  baseurl "http://www.hop5.in/yum/el6/"
-  gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-HOP5'
+yum_repository 'opsrock-hhvm-depends' do
+  description "Opsrock hhvm dependency packages for Amazon Linux Repository"
+  baseurl "https://packagecloud.io/opsrock-hhvm/hhvm-depends/el/6/$basearch"
+  gpgkey 'https://packagecloud.io/gpg.key'
   action :create
+  gpgcheck false
   priority '9'
-  includepkgs hoppkgs.join(",")
+  includepkgs depend_packages.join(",")
 end
 
 yum_repository 'home_ocaml' do
@@ -35,8 +35,8 @@ yum_package "opam" do
   options '--enablerepo=home_ocaml'
 end
 
-## install from hop5
-hoppkgs.map do |pkg|
+## install from hhvm-depends
+depend_packages.map do |pkg|
   yum_package pkg do
     action :install
     options '-y --nogpgcheck'
