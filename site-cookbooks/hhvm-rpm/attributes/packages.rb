@@ -44,7 +44,7 @@ build_deps_from_amzn: %w[
 ],
 build_deps_from_epel: %w[
 ],
-build_deps_from_hop5: %w[
+build_deps_from_fedora: %w[
   glog-devel
   tbb-devel
 ],
@@ -65,7 +65,7 @@ run_deps_from_amazon: %w[
   unixODBC
   libdwarf
 ],
-run_deps_from_hop5: %w[
+run_deps_from_fedora: %w[
   glog
   tbb
 ]
