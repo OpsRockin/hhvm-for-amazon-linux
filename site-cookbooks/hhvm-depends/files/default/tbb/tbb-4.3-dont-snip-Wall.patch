@@ -1,0 +1,11 @@
+--- tbb43_20150611oss/build/Makefile.tbbmalloc_	2015-12-29 09:02:56.091084172 +0000
++++ tbb43_20150611oss/build/Makefile.tbbmalloc	2015-12-29 09:03:39.586694891 +0000
+@@ -51,7 +51,7 @@
+ MALLOC_CPLUS.OBJ = backend.$(OBJ) large_objects.$(OBJ) backref.$(OBJ)  tbbmalloc.$(OBJ)
+ MALLOC.OBJ := $(MALLOC_CPLUS.OBJ) $(MALLOC_ASM.OBJ) itt_notify_malloc.$(OBJ) frontend.$(OBJ)
+ PROXY.OBJ := proxy.$(OBJ) tbb_function_replacement.$(OBJ)
+-M_CPLUS_FLAGS := $(subst $(WARNING_KEY),,$(M_CPLUS_FLAGS)) $(DEFINE_KEY)__TBBMALLOC_BUILD=1
++M_CPLUS_FLAGS := -fno-strict-aliasing $(DEFINE_KEY)__TBBMALLOC_BUILD=1
+ M_INCLUDES := $(INCLUDES) $(INCLUDE_KEY)$(MALLOC_ROOT) $(INCLUDE_KEY)$(MALLOC_SOURCE_ROOT)
+ 
+ # Suppress superfluous warnings for TBBMalloc compilation

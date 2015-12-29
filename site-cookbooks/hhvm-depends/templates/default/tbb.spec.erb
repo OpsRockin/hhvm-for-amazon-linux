@@ -1,0 +1,121 @@
+%define releasedate <%= @releasedate %>
+%define major <%= @major %>
+%define minor <%= @minor %>
+%define update <%= @update %>
+%define dotver %{major}.%{minor}
+%define sourcebasename tbb%{major}%{minor}_%{releasedate}oss
+
+%define sourcefilename %{sourcebasename}_src.tgz
+
+Name:    tbb
+Summary: The Threading Building Blocks library abstracts low-level threading details
+Version: %{dotver}
+Release: u%{update}.<%= @release %>%{?dist}
+License: GPLv2 with exceptions
+Group:   Development/Tools
+URL:     http://threadingbuildingblocks.org/
+
+Source0: http://threadingbuildingblocks.org/sites/default/files/software_releases/source/%{sourcebasename}_src.tgz
+# These two are downstream sources.
+Source6: tbb.pc
+Source7: tbbmalloc.pc
+Source8: tbbmalloc_proxy.pc
+
+# Don't snip -Wall from C++ flags.  Add -fno-strict-aliasing, as that
+# uncovers some static-aliasing warnings.
+# Related: https://bugzilla.redhat.com/show_bug.cgi?id=1037347
+Patch1: tbb-4.3-dont-snip-Wall.patch
+
+BuildRequires: libstdc++-devel
+
+%description
+Threading Building Blocks (TBB) is a C++ runtime library that
+abstracts the low-level threading details necessary for optimal
+multi-core performance.  It uses common C++ templates and coding style
+to eliminate tedious threading implementation work.
+
+TBB requires fewer lines of code to achieve parallelism than other
+threading models.  The applications you write are portable across
+platforms.  Since the library is also inherently scalable, no code
+maintenance is required as more processor cores become available.
+
+
+%package devel
+Summary: The Threading Building Blocks C++ headers and shared development libraries
+Group: Development/Libraries
+Requires: %{name}%{?_isa} = %{version}-%{release}
+
+%description devel
+Header files and shared object symlinks for the Threading Building
+Blocks (TBB) C++ libraries.
+
+
+%package doc
+Summary: The Threading Building Blocks documentation
+Group: Documentation
+
+%description doc
+PDF documentation for the user of the Threading Building Block (TBB)
+C++ library.
+
+
+%prep
+%setup -q -n %{sourcebasename}
+%patch1 -p1
+
+%build
+make %{?_smp_mflags} CXXFLAGS="$RPM_OPT_FLAGS" tbb_build_prefix=obj
+for file in %{SOURCE6} %{SOURCE7} %{SOURCE8}; do
+    sed 's/_FEDORA_VERSION/%{major}.%{minor}.%{update}/' ${file} \
+        > $(basename ${file})
+done
+
+%check
+%ifarch ppc64le
+make test
+%endif
+
+%install
+mkdir -p $RPM_BUILD_ROOT/%{_libdir}
+mkdir -p $RPM_BUILD_ROOT/%{_includedir}
+
+pushd build/obj_release
+    for file in libtbb{,malloc{,_proxy}}; do
+        install -p -D -m 755 ${file}.so.2 $RPM_BUILD_ROOT/%{_libdir}
+        ln -s $file.so.2 $RPM_BUILD_ROOT/%{_libdir}/$file.so
+    done
+popd
+
+pushd include
+    find tbb -type f ! -name \*.htm\* -exec \
+        install -p -D -m 644 {} $RPM_BUILD_ROOT/%{_includedir}/{} \
+    \;
+popd
+
+for file in %{SOURCE6} %{SOURCE7} %{SOURCE8}; do
+    install -p -D -m 644 $(basename ${file}) \
+    $RPM_BUILD_ROOT/%{_libdir}/pkgconfig/$(basename ${file})
+done
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%files
+%doc COPYING doc/Release_Notes.txt
+%{_libdir}/*.so.2
+
+%files devel
+%doc CHANGES
+%{_includedir}/tbb
+%{_libdir}/*.so
+%{_libdir}/pkgconfig/*.pc
+
+%files doc
+%doc doc/Release_Notes.txt
+%doc doc/html
+
+%changelog
+* Tue Dec 29 2015 SAWANOBORI Yukihiko <sawanoboriyu@higanworks.com> - 4.3.u6-1
+- port from fedoraproject 4.3-3.20141204.
+- update release 4.3u2 to 4.3u6

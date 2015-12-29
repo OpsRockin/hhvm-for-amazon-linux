@@ -40,6 +40,7 @@ build_deps_from_amzn: %w[
   subversion
   unixODBC-devel
   libdwarf-devel
+  libstdc++-devel
 ],
 build_deps_from_epel: %w[
 ],
