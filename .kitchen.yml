@@ -17,9 +17,9 @@ provisioner:
   cookbok_path: ["./cookbooks", "./site-cookbooks", "./test/cookboks"]
 
 platforms:
-  - name: amazon-2015.03.1
+  - name: amazon-2015.09.1
     driver:
-      image_id: <%= ENV['AWS_EC2_AMI_ID'] || 'ami-cbf90ecb' %> # Tokyo
+      image_id: <%= ENV['AWS_EC2_AMI_ID'] || 'ami-383c1956' %> # Tokyo
       instance_type: c4.2xlarge
     provisioner:
       chef_omnibus_install_options: " && sudo yum -y update"
@@ -35,6 +35,17 @@ suites:
       hhvm_rpm:
         build:
           action: run
+  - name: depends
+    run_list:
+      - build-essential
+      - hhvm-rpm::prepare
+      - hhvm-depends::build_glog
+      - hhvm-depends::build_tbb
+    attributes:
+      glog:
+        action: run
+      tbb:
+        action: run
   - name: packaged
     run_list:
       - test_rpm
