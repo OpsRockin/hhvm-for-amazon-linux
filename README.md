@@ -6,7 +6,7 @@ Building rpm-package of [hiphop-php(hhvm)](http://hhvm.com) from source for Amaz
 
 RPMs are provided via package_cloud.
 
-- Stable: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-stable)
+- Stable: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-stable2)
 - Test: [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/opsrock-hhvm/hhvm-test)
 
 ## Current Status of this branch
