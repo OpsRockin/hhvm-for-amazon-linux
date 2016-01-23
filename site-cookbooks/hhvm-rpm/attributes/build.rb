@@ -1,7 +1,7 @@
 default[:hhvm_rpm][:build] = {
   name: "hhvm",
   src: "https://github.com/facebook/hhvm.git",
-  version: '3.11.0',
+  version: '3.11.1',
   release: 1,
   cmake_opts: %w[
     -DENABLE_ZEND_COMPAT=ON
