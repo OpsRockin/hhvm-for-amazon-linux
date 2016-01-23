@@ -20,9 +20,9 @@ special options
 
 ### Runtime Requrements
 
-- hop5 Package Repository [http://www.hop5.in](http://www.hop5.in)
-    - Google glog
-    - Intel tbb (> 2.4)
+- my hhvm-depens Package Repository [/opsrock-hhvm/hhvm-develop](https://packagecloud.io/opsrock-hhvm/hhvm-develop)
+    - Google glog 3.3
+    - Intel tbb 4.3
 - mysql or its alternatives such as below.
     - mysql-server
     - mariadb-server
