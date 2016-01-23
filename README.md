@@ -20,7 +20,7 @@ special options
 
 ### Runtime Requrements
 
-- my hhvm-depens Package Repository [/opsrock-hhvm/hhvm-develop](https://packagecloud.io/opsrock-hhvm/hhvm-develop)
+- my hhvm-depends Package Repository [/opsrock-hhvm/hhvm-depends](https://packagecloud.io/opsrock-hhvm/hhvm-depends)
     - Google glog 3.3
     - Intel tbb 4.3
 - mysql or its alternatives such as below.
@@ -33,24 +33,23 @@ special options
 ### Shell example
 
 ```
-## Add pop5
-cat <<'EOL'  > /etc/yum.repos.d/hop5.repo 
-[hop5]
-name=www.hop5.in Centos Repository
-baseurl=http://www.hop5.in/yum/el6/
+## Add opsrock-hhvm-depends
+cat <<'EOL'  > /etc/yum.repos.d/opsrock-hhvm-depends.repo
+[opsrock-hhvm-depens]
+name=Opsrock hhvm depends for Amazon Linux Repository
+baseurl=https://packagecloud.io/opsrock-hhvm/hhvm-depends/el/6/$basearch
 enabled=1
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-HOP5
+gpgkey=https://packagecloud.io/gpg.key
 includepkgs=glog,tbb
-priority=9
 sslverify=true
 EOL
 
 ## Add OpsRock
-cat <<'EOL' > /etc/yum.repos.d/opsrock-hhvm.repo 
+cat <<'EOL' > /etc/yum.repos.d/opsrock-hhvm.repo
 [opsrock-hhvm]
 name=Opsrock hhvm for Amazon Linux Repository
-baseurl=https://packagecloud.io/opsrock-hhvm/hhvm-test/el/6/$basearch
+baseurl=https://packagecloud.io/opsrock-hhvm/hhvm-stable2/el/6/$basearch
 enabled=1
 gpgcheck=1
 gpgkey=https://packagecloud.io/gpg.key
