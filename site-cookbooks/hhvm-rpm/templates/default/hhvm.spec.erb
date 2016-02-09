@@ -79,6 +79,9 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/hhvm/hdf/
 # Copy the actual binary
 %{__install} -m 755 -p $RPM_BUILD_ROOT/%{_libdir}/hiphop-php/hphp/hhvm/hhvm \
     $RPM_BUILD_ROOT/%{_bindir}/hhvm
+# Copy tools
+%{__install} -m 775 -p $RPM_BUILD_ROOT/%{_libdir}/hiphop-php/hphp/tools/oss-repo-mode \
+    $RPM_BUILD_ROOT/%{_bindir}/hhvm-repo-mode
 echo "export USE_HHVM=1" > $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
 echo "export HPHP_HOME=%{_libdir}/hiphop-php" >> $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
 echo "export HPHP_LIB=%{_libdir}/hiphop-php/bin" >> /$RPM_BUILD_ROOT/%{_sysconfdir}/profile.d/hphp.sh
@@ -107,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) /etc/profile.d/hphp.sh
 %config(noreplace) /etc/sysconfig/hhvm
 /usr/bin/hhvm
+/usr/bin/hhvm-repo-mode
 %config /usr/share/hhvm/hdf/static.mime-types.hdf
 /var/log/hhvm/
 
@@ -115,6 +119,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Feb 9 2016 sawanoboly 3.11.1-2
+  - copy tools/oss-repo-mode as hhvm-repo-mode
+
+* Tue Feb 9 2016 sawanoboly 3.9.1-4
+  - copy tools/oss-repo-mode as hhvm-repo-mode
+
 * Sat Jan 23 2016 sawanoboly 3.11.1-1
   - release 3.11.1
 
