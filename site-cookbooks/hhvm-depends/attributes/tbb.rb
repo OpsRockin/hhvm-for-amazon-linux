@@ -1,9 +1,10 @@
+# https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160128oss_src.tgz
 default[:tbb] = {
-  releasedate: '20150611',
+  releasedate: '20160128',
   major: '4',
-  minor: '3',
-  update: '6',
+  minor: '4',
+  update: '3',
   release: "1",
-  shasum:  '221f85fe64e11c9638e43b3c57d5750c26683905fc90827c0bcfefdb286e79c9',
+  shasum:  '8d256bf13aef1b0726483af9f955918f04e3de4ebbf6908aa1b0c94cbe784ad7',
   action: 'nothing'
 }

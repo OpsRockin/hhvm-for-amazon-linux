@@ -1,0 +1,8 @@
+diff -up tbb44_20160128oss/src/tbb/tools_api/ittnotify_static.c~ tbb44_20160128oss/src/tbb/tools_api/ittnotify_static.c
+--- tbb44_20160128oss/src/tbb/tools_api/ittnotify_static.c~	2016-01-28 11:30:11.000000000 -0700
++++ tbb44_20160128oss/src/tbb/tools_api/ittnotify_static.c	2016-02-20 11:24:34.103412460 -0700
+@@ -1038,3 +1038,4 @@ ITT_EXTERN_C __itt_error_handler_t* _N_(
+ #pragma warning(pop)
+ #endif /* ITT_PLATFORM==ITT_PLATFORM_WIN */
+ 
++#undef min

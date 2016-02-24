@@ -21,10 +21,24 @@ Source6: tbb.pc
 Source7: tbbmalloc.pc
 Source8: tbbmalloc_proxy.pc
 
+# Propagate CXXFLAGS variable into flags used when compiling C++.
+# This is so that RPM_OPT_FLAGS are respected.
+Patch1: tbb-4.4-cxxflags.patch
+
+# For 32-bit x86 only, don't assume that the mfence instruction is available.
+# It was added with SSE2.  This patch causes a lock xchg instruction to be
+# emitted for non-SSE2 builds, and the mfence instruction to be emitted for
+# SSE2-enabled builds.
+Patch2: tbb-4.0-mfence.patch
+
 # Don't snip -Wall from C++ flags.  Add -fno-strict-aliasing, as that
 # uncovers some static-aliasing warnings.
 # Related: https://bugzilla.redhat.com/show_bug.cgi?id=1037347
-Patch1: tbb-4.3-dont-snip-Wall.patch
+Patch3: tbb-4.3-dont-snip-Wall.patch
+
+# Upstream: 20 Feb 2016.  Fix a min macro that clashes with std::min.
+Patch4: tbb-4.4-min.patch
+
 
 BuildRequires: libstdc++-devel
 
@@ -62,6 +76,9 @@ C++ library.
 %prep
 %setup -q -n %{sourcebasename}
 %patch1 -p1
+%patch2 -p1
+# %patch3 -p1
+%patch4 -p1
 
 %build
 make %{?_smp_mflags} CXXFLAGS="$RPM_OPT_FLAGS" tbb_build_prefix=obj
@@ -82,7 +99,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_includedir}
 pushd build/obj_release
     for file in libtbb{,malloc{,_proxy}}; do
         install -p -D -m 755 ${file}.so.2 $RPM_BUILD_ROOT/%{_libdir}
-        ln -s $file.so.2 $RPM_BUILD_ROOT/%{_libdir}/$file.so
+        ln -sf $file.so.2 $RPM_BUILD_ROOT/%{_libdir}/$file.so
     done
 popd
 
@@ -116,6 +133,10 @@ done
 %doc doc/html
 
 %changelog
+* Wed Feb 24 2016 SAWANOBORI Yukihiko <sawanoboriyu@higanworks.com> - 4.4.u3-1
+- port from fedoraproject 4.4-3.20160128.
+- update release 4.3u6 to 4.4u3
+
 * Tue Dec 29 2015 SAWANOBORI Yukihiko <sawanoboriyu@higanworks.com> - 4.3.u6-1
 - port from fedoraproject 4.3-3.20141204.
 - update release 4.3u2 to 4.3u6
