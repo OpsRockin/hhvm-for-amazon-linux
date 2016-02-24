@@ -22,7 +22,7 @@ special options
 
 - my hhvm-depends Package Repository [/opsrock-hhvm/hhvm-depends](https://packagecloud.io/opsrock-hhvm/hhvm-depends)
     - Google glog 3.3
-    - Intel tbb 4.3
+    - Intel tbb 4.3, 4.4
 - mysql or its alternatives such as below.
     - mysql-server
     - mariadb-server

@@ -13,6 +13,16 @@ yum_repository 'opsrock-hhvm-depends' do
   includepkgs depend_packages.join(",")
 end
 
+yum_repository 'opsrock-hhvm-depends-devel' do
+  description "Opsrock hhvm dependency packages for Amazon Linux Repository"
+  baseurl "https://packagecloud.io/opsrock-hhvm/hhvm-depends-devel/el/6/$basearch"
+  gpgkey 'https://packagecloud.io/gpg.key'
+  action :create
+  gpgcheck false
+  priority '8'
+  includepkgs depend_packages.join(",")
+end
+
 yum_repository 'home_ocaml' do
   description "opam (CentOS_6)"
   baseurl "http://download.opensuse.org/repositories/home:/ocaml/CentOS_6/"
