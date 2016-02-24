@@ -12,6 +12,9 @@ tbb-4.3-dont-snip-Wall.patch
 tbb.pc
 tbbmalloc.pc
 tbbmalloc_proxy.pc
+tbb-4.4-cxxflags.patch
+tbb-4.0-mfence.patch
+tbb-4.4-min.patch
 ]
 
 
