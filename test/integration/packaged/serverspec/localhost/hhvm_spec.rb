@@ -22,5 +22,5 @@ describe command('hhvm --version') do
 end
 
 describe command('rpm -q --changelog hhvm') do
-  its(:stdout) { should match /sawanoboly\s3\.12\.0-1\n/ }
+  its(:stdout) { should match /sawanoboly\s3\.12\.0-2\n/ }
 end
