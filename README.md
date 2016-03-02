@@ -11,7 +11,7 @@ RPMs are provided via package_cloud.
 
 ## Current Status of this branch
 
-- HHVM 3.9.0
+- HHVM 3.9.2
 
 special options
 
@@ -22,7 +22,7 @@ special options
 
 - my hhvm-depends Package Repository [/opsrock-hhvm/hhvm-depends](https://packagecloud.io/opsrock-hhvm/hhvm-depends)
     - Google glog 3.3
-    - Intel tbb 4.3
+    - Intel tbb 4.3, 4.4
 - mysql or its alternatives such as below.
     - mysql-server
     - mariadb-server
@@ -35,7 +35,7 @@ special options
 ```
 ## Add opsrock-hhvm-depends
 cat <<'EOL'  > /etc/yum.repos.d/opsrock-hhvm-depends.repo
-[opsrock-hhvm-depens]
+[opsrock-hhvm-depends]
 name=Opsrock hhvm depends for Amazon Linux Repository
 baseurl=https://packagecloud.io/opsrock-hhvm/hhvm-depends/el/6/$basearch
 enabled=1
