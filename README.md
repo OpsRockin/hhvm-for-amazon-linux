@@ -11,7 +11,7 @@ RPMs are provided via package_cloud.
 
 ## Current Status of this branch
 
-- HHVM 3.13.0
+- HHVM 3.13.1
 
 special options
 
