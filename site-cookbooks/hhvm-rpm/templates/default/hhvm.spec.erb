@@ -24,7 +24,7 @@ Requires: libdwarf >= 20130207
 Requires: libevent >= 1.4.14
 Requires: libicu >= 4.2
 Requires: libmcrypt >= 2.5.8-9
-Requires: libmemcached >= 1.0.8
+Requires: libmemcached
 # Requires: mysql  ## for optional choice MariaDB or Percona
 Requires: oniguruma >= 5.9
 Requires: openssl
@@ -119,6 +119,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Apr 22 2016 sawanoboly 3.12.1-2
+  - remove depends version from libmemcached
+
 * Tue Mar 1 2016 sawanoboly 3.12.1-1
   - release 3.12.1 LTS
 

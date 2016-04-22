@@ -2,7 +2,7 @@ default[:hhvm_rpm][:build] = {
   name: "hhvm",
   src: "https://github.com/facebook/hhvm.git",
   version: '3.12.1',
-  release: 1,
+  release: 2,
   cmake_opts: %w[
     -DENABLE_ZEND_COMPAT=ON
     -DMYSQL_UNIX_SOCK_ADDR=/var/lib/mysql/mysql.sock
