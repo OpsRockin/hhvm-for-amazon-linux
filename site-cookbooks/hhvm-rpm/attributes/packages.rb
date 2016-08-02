@@ -41,6 +41,7 @@ build_deps_from_amzn: %w[
   unixODBC-devel
   libdwarf-devel
   libstdc++-devel
+  mercurial
 ],
 build_deps_from_epel: %w[
 ],
