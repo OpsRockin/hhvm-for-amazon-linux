@@ -17,9 +17,9 @@ provisioner:
   cookbok_path: ["./cookbooks", "./site-cookbooks", "./test/cookboks"]
 
 platforms:
-  - name: amazon-2016.03.3
+  - name: amazon-2016.09.0
     driver:
-      image_id: <%= ENV['AWS_EC2_AMI_ID'] || 'ami-374db956' %> # Tokyo
+      image_id: <%= ENV['AWS_EC2_AMI_ID'] || 'ami-1a15c77b' %> # Tokyo
       instance_type: c4.2xlarge
     provisioner:
       chef_omnibus_install_options: " && sudo yum -y update"
