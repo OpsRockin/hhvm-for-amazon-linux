@@ -13,7 +13,7 @@ SITE
     yum (3.5.3)
 
 PATH
-  remote: /Users/sawanoboriyu/github/opsrockin/hhvm-for-amazon-linux/test/cookbooks/test_rpm
+  remote: /Users/sawanoboriyu/develop/src/github.com/OpsRockin/hhvm-for-amazon-linux/test/cookbooks/test_rpm
   specs:
     test_rpm (0.1.0)
       yum (>= 0.0.0)
