@@ -3,14 +3,6 @@ GEM
   specs:
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    aws-sdk (2.10.91)
-      aws-sdk-resources (= 2.10.91)
-    aws-sdk-core (2.10.91)
-      aws-sigv4 (~> 1.0)
-      jmespath (~> 1.0)
-    aws-sdk-resources (2.10.91)
-      aws-sdk-core (= 2.10.91)
-    aws-sigv4 (1.0.2)
     builder (3.2.3)
     chef (13.6.4)
       addressable
@@ -54,6 +46,9 @@ GEM
       rack (~> 2.0)
       uuidtools (~> 2.1)
     diff-lcs (1.3)
+    docker-api (1.34.0)
+      excon (>= 0.47.0)
+      multi_json
     erubis (2.7.0)
     excon (0.59.0)
     ffi (1.9.18)
@@ -70,15 +65,10 @@ GEM
     iniparse (1.4.4)
     ipaddress (0.8.3)
     iso8601 (0.9.1)
-    jmespath (1.3.1)
-    kitchen-ec2 (1.3.2)
-      aws-sdk (~> 2)
-      excon
-      multi_json
-      retryable (~> 2.0)
-      test-kitchen (~> 1.4, >= 1.4.1)
-    knife-zero (1.19.0)
-      chef (>= 12.6)
+    kitchen-dokken (2.6.5)
+      docker-api (~> 1.33)
+      lockfile (~> 2.1)
+      test-kitchen (~> 1.15)
     librarian (0.1.2)
       highline
       thor (~> 0.15)
@@ -88,6 +78,7 @@ GEM
       minitar (>= 0.5.2)
     libyajl2 (1.2.0)
     little-plugger (1.1.4)
+    lockfile (2.1.3)
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
@@ -133,7 +124,6 @@ GEM
     proxifier (1.0.3)
     public_suffix (3.0.1)
     rack (2.0.3)
-    retryable (2.0.4)
     rspec (3.7.0)
       rspec-core (~> 3.7.0)
       rspec-expectations (~> 3.7.0)
@@ -205,8 +195,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  kitchen-ec2
-  knife-zero
+  kitchen-dokken
   librarian-chef
   test-kitchen
 
